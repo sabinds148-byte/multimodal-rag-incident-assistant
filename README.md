@@ -9,8 +9,8 @@ A multimodal Retrieval-Augmented Generation (RAG) pipeline built on Azure OpenAI
    - [extract_sops.py](extract_sops.py) — reads SOP text files (`sops/`) into `data/parsed_sops.json`.
    - [extract_images_caption.py](extract_images_caption.py) — captions incident images (`images/`) using an Azure OpenAI vision-capable deployment into `data/parsed_images.json`.
 2. **Indexing**
-   - [prepare_search_documents.py](prepare_search_documents.py) — combines the parsed JSON into search documents and generates embeddings via Azure OpenAI.
    - [create_vector_index.py](create_vector_index.py) — (re)creates the Azure AI Search index with vector + keyword fields.
+   - [prepare_search_documents.py](prepare_search_documents.py) — combines the parsed JSON into search documents and generates embeddings via Azure OpenAI.
 3. **Retrieval & Response**
    - [hybrid_search.py](hybrid_search.py) — runs hybrid (vector + keyword) queries against the Azure AI Search index.
    - [rag_response.py](rag_response.py) — orchestrates retrieval and generates grounded answers with an Azure OpenAI chat deployment, keeping a rolling chat history.
@@ -25,11 +25,21 @@ A multimodal Retrieval-Augmented Generation (RAG) pipeline built on Azure OpenAI
 
 ## Setup
 
-1. Install dependencies:
+1. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+
+   # Windows
+   venv\Scripts\activate
+
+   # macOS/Linux
+   source venv/bin/activate
+   ```
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-2. Create a `.env` file in this directory with the following variables:
+3. Create a `.env` file in this directory with the following variables:
    ```
    DOC_INTELLIGENCE_ENDPOINT=
    DOC_INTELLIGENCE_KEY=
@@ -63,6 +73,12 @@ To avoid ongoing Azure charges and reset local state:
 - **Delete the search index**: re-running `python create_vector_index.py` drops and recreates `AZURE_SEARCH_INDEX`, or delete it directly in the Azure Portal / via the Azure AI Search REST API.
 - **Remove generated artifacts**: delete the contents of `data/` (parsed JSON) to force a clean re-run of the extraction scripts.
 - **Delete Azure resources**: if you're done with the project, remove the Azure OpenAI, Azure AI Search, and Azure AI Document Intelligence resources (or their resource group) from the Azure Portal to stop billing.
+- **Remove the virtual environment**:
+  ```bash
+  deactivate
+  rm -rf venv          # macOS/Linux
+  rmdir /s /q venv      # Windows
+  ```
 
 ## Project structure
 
