@@ -94,7 +94,7 @@ Answer:
 # Generate GPT response
 def generate_answer(prompt):
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model=AZURE_GPT_DEPLOYMENT,
         messages=[
             {"role": "system", "content": "You are a smart incident response assistant."},
             {"role": "user", "content": prompt}
