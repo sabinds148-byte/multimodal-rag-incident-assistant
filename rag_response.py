@@ -99,8 +99,8 @@ def generate_answer(prompt):
             {"role": "system", "content": "You are a smart incident response assistant."},
             {"role": "user", "content": prompt}
         ],
-        temperature=0.2,
-        max_tokens=500
+        max_completion_tokens=500,
+        reasoning_effort="minimal"
     )
     return response.choices[0].message.content.strip()
 

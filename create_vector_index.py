@@ -87,7 +87,7 @@ index_schema = {
 resp = requests.put(url, headers=headers, json=index_schema)
 
 if resp.status_code in (200, 201):
-    print(f"✅ Index '{index_name}' created successfully using 2024-07-01 API.")
+    print(f"✅ Index '{index_name}' created successfully using {api_version} API.")
 else:
     print(f"❌ Error {resp.status_code} while creating index:")
     print(resp.text)

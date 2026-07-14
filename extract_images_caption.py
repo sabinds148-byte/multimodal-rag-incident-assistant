@@ -51,7 +51,8 @@ for folder, _, files in os.walk(image_dir):
                         ]
                     }
                 ],
-                max_tokens=100
+                max_completion_tokens=300,
+                reasoning_effort="minimal"
             )
 
             caption = response.choices[0].message.content

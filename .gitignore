@@ -24,8 +24,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Generated data / extraction output
-extracted/
-
 # Logs
 *.log

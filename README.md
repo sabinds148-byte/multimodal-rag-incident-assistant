@@ -48,12 +48,21 @@ Run the pipeline in order:
 
 ```bash
 python extract_incidents.py
-python extract_sops.py
 python extract_images_caption.py
-python prepare_search_documents.py
+python extract_sops.py
 python create_vector_index.py
+python prepare_search_documents.py
+python hybrid_search.py 
 python rag_response.py
 ```
+
+## Cleanup
+
+To avoid ongoing Azure charges and reset local state:
+
+- **Delete the search index**: re-running `python create_vector_index.py` drops and recreates `AZURE_SEARCH_INDEX`, or delete it directly in the Azure Portal / via the Azure AI Search REST API.
+- **Remove generated artifacts**: delete the contents of `data/` (parsed JSON) to force a clean re-run of the extraction scripts.
+- **Delete Azure resources**: if you're done with the project, remove the Azure OpenAI, Azure AI Search, and Azure AI Document Intelligence resources (or their resource group) from the Azure Portal to stop billing.
 
 ## Project structure
 
@@ -62,5 +71,4 @@ pdfs/     Source incident report PDFs
 sops/     Standard operating procedure text files
 images/   Incident-scene images
 data/     Extracted/parsed JSON artifacts
-extracted/ Additional extraction output
 ```
