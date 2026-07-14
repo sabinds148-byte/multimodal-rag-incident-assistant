@@ -76,8 +76,9 @@ To avoid ongoing Azure charges and reset local state:
 - **Remove the virtual environment**:
   ```bash
   deactivate
-  rm -rf venv          # macOS/Linux
-  rmdir /s /q venv      # Windows
+  rm -rf venv                        # macOS/Linux
+  Remove-Item -Recurse -Force venv   # Windows PowerShell
+  rmdir /s /q venv                   # Windows cmd.exe
   ```
 
 ## Project structure
